@@ -14,6 +14,8 @@ class Game {
         this.ctx = this.hud.getContext('2d')
         this.glVar = {}
 
+        WebGLF.glInit(this.gl, this.glVar)
+
         // Adding Input listener
         this.canvas.addEventListener('mousedown', (event) => this.mouseDown(event), false)
         this.canvas.addEventListener('mouseup', (event) => this.mouseUp(event), false)
