@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset='UTF-8'/>
+        <title>3D HUD Template</title>
+        <style>
+            @font-face {
+                font-family: 'neodgm';
+                src: url('font/neodgm.ttf');
+            }
+
+            body {
+                touch-action: none;
+                overscroll-behavior: none;
+            }
+
+            #screen {
+                left: 0;
+                right: 0;
+                top: 0;
+                bottom: 0;
+                margin: auto;
+                max-height: 96%;
+                max-width: 96%;
+            }
+        </style>
+    </head>
+    <body>
+        <canvas id='screen' width='1280' height='720'></canvas>
+        <script src='script/asset.js'></script>
+        <script src='script/ui.js'></script>
+        <script src='script/shader.js'></script>
+        <script src='script/webgl.js'></script>
+
+        <script src='script/primitive.js'></script>
+        <script src='script/player.js'></script>
+        <script src='script/world.js'></script>
+        <script src='script/rendergl.js'></script>
+        <script src='script/renderhud.js'></script>
+        <script src='script/function.js'></script>
+
+        <script src='script/scenetitle.js'></script>
+
+        <script src='script/game.js'></script>
+        <script src='script/main.js'></script>
+    </body>
+</html>
