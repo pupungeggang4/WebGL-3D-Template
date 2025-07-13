@@ -4,13 +4,13 @@ const vSource = `#version 300 es
     uniform vec3 u_m_rot;
     uniform vec3 u_c_pos;
     uniform vec4 u_c_proj;
-    uniform int u_mode_hud;
+    uniform int u_mode_v;
     in vec4 a_position;
     in vec2 a_texcoord;
     out vec2 p_texcoord;
 
     void main() {
-        if (u_mode_hud == 0) {
+        if (u_mode_v == 0) {
             gl_Position = a_position;
         } else {
             vec4 pos = a_position;

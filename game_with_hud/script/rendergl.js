@@ -2,7 +2,7 @@
 class RenderGL {
     static renderCuboidTex(gl, glVar, camera, cuboid, texImage) {
         // Texture enabled
-        gl.uniform1i(glVar.location['u_mode_render'], 2)
+        gl.uniform1i(glVar.location['u_mode_f'], 2)
         gl.uniform3f(glVar.location['u_c_pos'], camera.pos.x, camera.pos.y, camera.pos.z)
         gl.uniform4f(glVar.location['u_c_proj'], camera.fov, camera.asp, camera.near, camera.far)
         gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, texImage)
@@ -22,7 +22,7 @@ class RenderGL {
 
     static renderCuboidColor(gl, glVar, camera, cuboid, color) {
         // Texture disabled
-        gl.uniform1i(glVar.location['u_mode_render'], 1)
+        gl.uniform1i(glVar.location['u_mode_f'], 1)
         gl.uniform3f(glVar.location['u_c_pos'], camera.pos.x, camera.pos.y, camera.pos.z)
         gl.uniform4f(glVar.location['u_c_proj'], camera.fov, camera.asp, camera.near, camera.far)
         gl.uniform3f(glVar.location['u_color'], color[0], color[1], color[2])

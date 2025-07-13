@@ -24,14 +24,14 @@ class SceneTitle {
 
         // Rendering 3D world.
         gl.enable(gl.DEPTH_TEST)
-        gl.uniform1i(glVar.location['u_mode_hud'], 1)
+        gl.uniform1i(glVar.location['u_mode_v'], 1)
         RenderGL.renderCuboidColor(gl, glVar, game.world.camera, game.c1, [0.0, 1.0, 0.0])
         RenderGL.renderCuboidTex(gl, glVar, game.world.camera, game.c2, Img.testImage)
 
         // Rendering 2D UI.
         gl.disable(gl.DEPTH_TEST)
-        gl.uniform1i(glVar.location['u_mode_hud'], 0)
-        gl.uniform1i(glVar.location['u_mode_render'], 0)
+        gl.uniform1i(glVar.location['u_mode_v'], 0)
+        gl.uniform1i(glVar.location['u_mode_f'], 0)
         gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, game.hud)
         
         gl.bindBuffer(gl.ARRAY_BUFFER, glVar.bHUD)

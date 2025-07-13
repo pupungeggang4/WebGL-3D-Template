@@ -24,13 +24,13 @@ class WebGLF {
         glVar.location = {}
         glVar.location['a_position'] = gl.getAttribLocation(glVar.program, 'a_position')
         glVar.location['a_texcoord'] = gl.getAttribLocation(glVar.program, 'a_texcoord')
-        glVar.location['u_mode_render'] = gl.getUniformLocation(glVar.program, 'u_mode_render')
+        glVar.location['u_mode_v'] = gl.getUniformLocation(glVar.program, 'u_mode_v')
+        glVar.location['u_mode_f'] = gl.getUniformLocation(glVar.program, 'u_mode_f')
         glVar.location['u_m_pos'] = gl.getUniformLocation(glVar.program, 'u_m_pos')
         glVar.location['u_m_size'] = gl.getUniformLocation(glVar.program, 'u_m_size')
         glVar.location['u_m_rot'] = gl.getUniformLocation(glVar.program, 'u_m_rot')
         glVar.location['u_c_pos'] = gl.getUniformLocation(glVar.program, 'u_c_pos')
         glVar.location['u_c_proj'] = gl.getUniformLocation(glVar.program, 'u_c_proj')
-        glVar.location['u_mode_hud'] = gl.getUniformLocation(glVar.program, 'u_mode_hud')
         glVar.location['u_color'] = gl.getUniformLocation(glVar.program, 'u_color')
 
         // VAOs and buffers
