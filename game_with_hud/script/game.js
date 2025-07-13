@@ -3,22 +3,41 @@ class Game {
     // When the game object is created.
     constructor() {
         Img.imageLoad()
+
+        // Handling whether mouse is pressed.
+        this.mousePressed = false
+
+        // Keyboard binding.
+        this.keyMapping = {} // Edit this. {'action': 'key'}
+
+        // Handling whether keyboard is pressed.
+        this.keyPressed = {}
+        for (let k in this.keyMapping) {
+            this.keyPressed[k] = false
+        }
+
         this.scene = 'title'
         this.state = ''
         this.menu = false
+
+        // Temp
+        this.c1 = new Cuboid3(-0.5, 0.0, 0.0, 0.5, 0.5, 0.5, -0.5, -0.5, 0.0)
+        this.c2 = new Cuboid3(0.5, 0.0, 0.0, 0.5, 0.5, 0.5, -0.5, 0.5, 0.0)
 
         // Creating canvas and HUD var.
         this.canvas = document.getElementById('screen')
         this.gl = this.canvas.getContext('webgl2')
         this.hud = document.createElement('canvas')
+        this.hud.width = 1280
+        this.hud.height = 720
         this.ctx = this.hud.getContext('2d')
         this.glVar = {}
 
         WebGLF.glInit(this.gl, this.glVar)
 
         // Adding Input listener
-        this.canvas.addEventListener('mousedown', (event) => this.mouseDown(event), false)
-        this.canvas.addEventListener('mouseup', (event) => this.mouseUp(event), false)
+        window.addEventListener('mousedown', (event) => this.mouseDown(event), false)
+        window.addEventListener('mouseup', (event) => this.mouseUp(event), false)
         window.addEventListener('keydown', (event) => this.keyDown(event), false)
         window.addEventListener('keyup', (event) => this.keyUp(event), false)
 
@@ -55,6 +74,7 @@ class Game {
         }
         let button = event.button
 
+        this.mousePressed = true
         // Actions by scene
         if (this.scene === 'title') {
             SceneTitle.mouseDown(this, pos, button)
@@ -70,6 +90,7 @@ class Game {
         }
         let button = event.button
 
+        this.mousePressed = false
         // Actions by scene
         if (this.scene === 'title') {
             SceneTitle.mouseUp(this, pos, button)
@@ -79,8 +100,15 @@ class Game {
     keyDown(event) {
         let key = event.key
 
+        // Handling whether key is pressed.
+        for (let k in this.keyPressed) {
+            if (key === this.keyMapping[k]) {
+                this.keyPressed[k] = true
+            }
+        }
+
         // Actions by scene
-        if (scene === 'title') {
+        if (this.scene === 'title') {
             SceneTitle.keyDown(this, key)
         }
     }
@@ -88,8 +116,15 @@ class Game {
     keyUp(event) {
         let key = event.key
 
+        // Handling whether key is pressed.
+        for (let k in this.keyPressed) {
+            if (key === this.keyMapping[k]) {
+                this.keyPressed[k] = false
+            }
+        }
+
         // Actions by scene
-        if (scene === 'title') {
+        if (this.scene === 'title') {
             SceneTitle.keyUp(this, key)
         }
 

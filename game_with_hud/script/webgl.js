@@ -23,14 +23,13 @@ class WebGLF {
         // Setting location
         glVar.location = {}
         glVar.location['a_position'] = gl.getAttribLocation(glVar.program, 'a_position')
-        glVar.location['a_position_hud'] = gl.getAttribLocation(glVar.program, 'a_position_hud')
         glVar.location['a_texcoord'] = gl.getAttribLocation(glVar.program, 'a_texcoord')
-        glVar.location['u_mode_v'] = gl.getUniformLocation(glVar.program, 'u_mode_v')
-        glVar.location['u_mode_f'] = gl.getUniformLocation(glVar.program, 'u_mode_f')
+        glVar.location['u_mode_render'] = gl.getUniformLocation(glVar.program, 'u_mode_render')
+        glVar.location['u_m_pos'] = gl.getUniformLocation(glVar.program, 'u_m_pos')
+        glVar.location['u_m_size'] = gl.getUniformLocation(glVar.program, 'u_m_size')
+        glVar.location['u_m_rot'] = gl.getUniformLocation(glVar.program, 'u_m_rot')
+        glVar.location['u_mode_hud'] = gl.getUniformLocation(glVar.program, 'u_mode_hud')
         glVar.location['u_color'] = gl.getUniformLocation(glVar.program, 'u_color')
-        //gl.vertexAttribPointer(glVar.location['a_position'], 3, gl.FLOAT, gl.FALSE, 3 * 4, 0 * 4)
-        gl.vertexAttribPointer(glVar.location['a_position_hud'], 2, gl.FLOAT, false, 4 * 4, 0 * 4)
-        gl.vertexAttribPointer(glVar.location['a_texcoord'], 2, gl.FLOAT, false, 4 * 4, 2 * 4)
 
         // VAOs and buffers
         glVar.vao = gl.createVertexArray()
@@ -38,6 +37,7 @@ class WebGLF {
         glVar.bHUD = gl.createBuffer(gl.ARRAY_BUFFER)
         glVar.bHUDIndex = gl.createBuffer(gl.ELEMENT_ARRAY_BUFFER)
         glVar.bCuboid = gl.createBuffer(gl.ARRAY_BUFFER)
+        glVar.bCuboidTex = gl.createBuffer(gl.ARRAY_BUFFER)
         glVar.bCuboidIndexF = gl.createBuffer(gl.ARRAY_BUFFER)
         glVar.bCuboidIndexE = gl.createBuffer(gl.ARRAY_BUFFER)
 
@@ -51,6 +51,43 @@ class WebGLF {
         gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, glVar.bHUDIndex)
         gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array([
             1, 2, 0, 0, 2, 3
+        ]), gl.STATIC_DRAW)
+        gl.bindBuffer(gl.ARRAY_BUFFER, glVar.bCuboid)
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([
+            -0.5, -0.5, -0.5, 1.0, 1.0,
+            0.5, -0.5, -0.5, 0.0, 1.0,
+            0.5, 0.5, -0.5, 0.0, 0.0,
+            -0.5, 0.5, -0.5, 1.0, 0.0,
+            -0.5, -0.5, 0.5, 0.0, 1.0,
+            0.5, -0.5, 0.5, 1.0, 1.0,
+            0.5, 0.5, 0.5, 1.0, 0.0,
+            -0.5, 0.5, 0.5, 0.0, 0.0,
+            -0.5, -0.5, 0.5, 1.0, 1.0,
+            -0.5, -0.5, -0.5, 0.0, 1.0,
+            -0.5, 0.5, -0.5, 0.0, 0.0,
+            -0.5, 0.5, 0.5, 1.0, 0.0,
+            0.5, -0.5, 0.5, 0.0, 1.0,
+            0.5, -0.5, -0.5, 1.0, 1.0,
+            0.5, 0.5, -0.5, 1.0, 0.0,
+            0.5, 0.5, 0.5, 0.0, 0.0,
+            -0.5, -0.5, 0.5, 1.0, 1.0,
+            0.5, -0.5, 0.5, 0.0, 1.0,
+            0.5, -0.5, -0.5, 0.0, 0.0,
+            -0.5, -0.5, -0.5, 1.0, 0.0,
+            -0.5, 0.5, 0.5, 0.0, 1.0,
+            0.5, 0.5, 0.5, 1.0, 1.0,
+            0.5, 0.5, -0.5, 1.0, 0.0,
+            -0.5, 0.5, -0.5, 0.0, 0.0,
+        ]), gl.STATIC_DRAW)
+        gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, glVar.bCuboidIndexF)
+        gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array([
+            3, 2, 0, 0, 2, 1, 5, 6, 4, 4, 6, 7,
+            11, 10, 8, 8, 10, 9, 13, 14, 12, 12, 14, 15,
+            19, 18, 16, 16, 18, 17, 21, 22, 20, 20, 22, 23
+        ]), gl.STATIC_DRAW)
+        gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, glVar.bCuboidIndexE)
+        gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array([
+            0, 1, 1, 2, 2, 3, 3, 0, 0, 4, 1, 5, 2, 6, 3, 7, 4, 5, 5, 6, 6, 7, 7, 4
         ]), gl.STATIC_DRAW)
 
         // Texture
