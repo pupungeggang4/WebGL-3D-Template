@@ -28,6 +28,8 @@ class WebGLF {
         glVar.location['u_m_pos'] = gl.getUniformLocation(glVar.program, 'u_m_pos')
         glVar.location['u_m_size'] = gl.getUniformLocation(glVar.program, 'u_m_size')
         glVar.location['u_m_rot'] = gl.getUniformLocation(glVar.program, 'u_m_rot')
+        glVar.location['u_c_pos'] = gl.getUniformLocation(glVar.program, 'u_c_pos')
+        glVar.location['u_c_proj'] = gl.getUniformLocation(glVar.program, 'u_c_proj')
         glVar.location['u_mode_hud'] = gl.getUniformLocation(glVar.program, 'u_mode_hud')
         glVar.location['u_color'] = gl.getUniformLocation(glVar.program, 'u_color')
 

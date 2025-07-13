@@ -1,8 +1,10 @@
 // 3D rendering functions.
 class RenderGL {
-    static renderCuboidTex(gl, glVar, cuboid, texImage) {
+    static renderCuboidTex(gl, glVar, camera, cuboid, texImage) {
         // Texture enabled
         gl.uniform1i(glVar.location['u_mode_render'], 2)
+        gl.uniform3f(glVar.location['u_c_pos'], camera.pos.x, camera.pos.y, camera.pos.z)
+        gl.uniform4f(glVar.location['u_c_proj'], camera.fov, camera.asp, camera.near, camera.far)
         gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, texImage)
         gl.uniform3f(glVar.location['u_m_pos'], cuboid.pos.x, cuboid.pos.y, cuboid.pos.z)
         gl.uniform3f(glVar.location['u_m_size'], cuboid.size.x, cuboid.size.y, cuboid.size.z)
@@ -18,9 +20,11 @@ class RenderGL {
         gl.drawElements(gl.TRIANGLES, 36, gl.UNSIGNED_SHORT, 0)
     }
 
-    static renderCuboidColor(gl, glVar, cuboid, color) {
+    static renderCuboidColor(gl, glVar, camera, cuboid, color) {
         // Texture disabled
         gl.uniform1i(glVar.location['u_mode_render'], 1)
+        gl.uniform3f(glVar.location['u_c_pos'], camera.pos.x, camera.pos.y, camera.pos.z)
+        gl.uniform4f(glVar.location['u_c_proj'], camera.fov, camera.asp, camera.near, camera.far)
         gl.uniform3f(glVar.location['u_color'], color[0], color[1], color[2])
         gl.uniform3f(glVar.location['u_m_pos'], cuboid.pos.x, cuboid.pos.y, cuboid.pos.z)
         gl.uniform3f(glVar.location['u_m_size'], cuboid.size.x, cuboid.size.y, cuboid.size.z)

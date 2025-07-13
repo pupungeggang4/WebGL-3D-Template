@@ -21,6 +21,7 @@ class Game {
         this.menu = false
 
         // Temp
+        this.world = new World()
         this.c1 = new Cuboid3(-0.5, 0.0, 0.0, 0.5, 0.5, 0.5, -0.5, -0.5, 0.0)
         this.c2 = new Cuboid3(0.5, 0.0, 0.0, 0.5, 0.5, 0.5, -0.5, 0.5, 0.0)
 

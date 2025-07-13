@@ -2,6 +2,8 @@ const vSource = `#version 300 es
     uniform vec3 u_m_pos;
     uniform vec3 u_m_size;
     uniform vec3 u_m_rot;
+    uniform vec3 u_c_pos;
+    uniform vec4 u_c_proj;
     uniform int u_mode_hud;
     in vec4 a_position;
     in vec2 a_texcoord;
@@ -42,11 +44,36 @@ const vSource = `#version 300 es
                 0.0, 0.0, 1.0, 0.0,
                 0.0, 0.0, 0.0, 1.0
             );
+            mat4 m_z_inv = mat4(
+                1.0, 0.0, 0.0, 0.0,
+                0.0, 1.0, 0.0, 0.0,
+                0.0, 0.0, -1.0, 0.0,
+                0.0, 0.0, 0.0, 1.0
+            );
+            mat4 m_c_pos = mat4(
+                1.0, 0.0, 0.0, 0.0,
+                0.0, 1.0, 0.0, 0.0,
+                0.0, 0.0, 1.0, 0.0,
+                u_c_pos.x, u_c_pos.y, u_c_pos.z, 1.0
+            );
+            float fov = u_c_proj.x;
+            float asp = u_c_proj.y;
+            float near = u_c_proj.z;
+            float far = u_c_proj.w;
+            mat4 m_cam_proj = mat4(
+                1.0 / (asp * tan(fov / 2.0)), 0.0, 0.0, 0.0,
+                0.0, 1.0 / tan(fov / 2.0), 0.0, 0.0,
+                0.0, 0.0, (near + far) / (near - far), -1.0,
+                0.0, 0.0, (2.0 * near * far) / (near - far), 0.0
+            );
             pos = m_size * pos;
             pos = m_rot_x * pos;
             pos = m_rot_y * pos;
             pos = m_rot_z * pos;
             pos = m_pos * pos;
+            pos = m_z_inv * pos;
+            pos = m_c_pos * pos;
+            pos = m_cam_proj * pos;
             gl_Position = pos;
         }
         p_texcoord = a_texcoord;

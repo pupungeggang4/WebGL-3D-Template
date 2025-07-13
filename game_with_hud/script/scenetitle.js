@@ -25,8 +25,8 @@ class SceneTitle {
         // Rendering 3D world.
         gl.enable(gl.DEPTH_TEST)
         gl.uniform1i(glVar.location['u_mode_hud'], 1)
-        RenderGL.renderCuboidColor(gl, glVar, game.c1, [0.0, 1.0, 0.0])
-        RenderGL.renderCuboidTex(gl, glVar, game.c2, Img.testImage)
+        RenderGL.renderCuboidColor(gl, glVar, game.world.camera, game.c1, [0.0, 1.0, 0.0])
+        RenderGL.renderCuboidTex(gl, glVar, game.world.camera, game.c2, Img.testImage)
 
         // Rendering 2D UI.
         gl.disable(gl.DEPTH_TEST)
