@@ -1,7 +1,16 @@
 class World {
     constructor() {
         this.camera = new Camera3()
-        this.thing = []
+        this.thing = [
+            new Cuboid3(-0.2, -0.2, 0.2, 0.2, 0.2, 0.2, 0.0, 0.0, 0.0),
+            new Cuboid3(0.2, -0.2, 0.2, 0.2, 0.2, 0.2, 0.0, 0.0, 0.0),
+        ]
+    }
+
+    render(game) {
+        for (let i = 0; i < this.thing.length; i++) {
+            RenderGL.renderCuboidColor(game.gl, game.glVar, this.camera, this.thing[i], [0.0, 1.0, 0.0])
+        }
     }
 }
 
