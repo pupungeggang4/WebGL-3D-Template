@@ -14,11 +14,11 @@ const fSource = `#version 300 es
         } else if (u_mode_f == 1) {
             o_color = vec4(u_color, 1.0);
         } else if (u_mode_f == 3) {
-            float brightness = max(dot(p_normal, normalize(-1.0 * u_light_d)), 0.2);
+            float brightness = max(dot(p_normal, normalize(-u_light_d)), 0.2);
             vec3 color = brightness * u_color;
             o_color = vec4(color, 1.0);
         } else if (u_mode_f == 4) {
-            float brightness = max(dot(p_normal, normalize(-1.0 * u_light_d)), 0.2);
+            float brightness = max(dot(p_normal, normalize(-u_light_d)), 0.2);
             vec4 color = texture(u_sampler, p_texcoord);
             color.x *= brightness;
             color.y *= brightness;

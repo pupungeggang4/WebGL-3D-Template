@@ -2,14 +2,25 @@ class World {
     constructor() {
         this.camera = new Camera3()
         this.thing = [
-            new Cuboid3(-0.5, 0.0, 0.2, 0.5, 0.5, 0.5, 0.5, 0.5, 0.0),
-            new Cuboid3(0.5, 0.0, 0.2, 0.5, 0.5, 0.5, 0.0, 0.5, 0.5),
+            new Cuboid3(-0.5, 0.5, 0.2, 0.5, 0.5, 0.5, 0.5, 0.5, 0.0),
+            new Cuboid3(0.5, 0.5, 0.2, 0.5, 0.5, 0.5, 0.0, 0.5, 0.5),
+            new Cuboid3(0.5, -0.5, 0.2, 0.5, 0.5, 0.5, 0.0, 0.0, 0.0),
+            new Cuboid3(-0.5, -0.5, 0.2, 0.5, 0.5, 0.5, 0.0, 0.0, 0.0),
         ]
+    }
+
+    handleTick(game) {
+        this.thing[0].rot.x += 0.5 * game.delta / 1000
+        this.thing[0].rot.y += 0.5 * game.delta / 1000
+        this.thing[1].rot.y += 0.5 * game.delta / 1000
+        this.thing[1].rot.x += 0.5 * game.delta / 1000
     }
 
     render(game) {
         RenderGL.renderCuboidColor(game.gl, game.glVar, this.camera, this.thing[0], [0.0, 1.0, 0.0], true, true, [0.0, 0.0, 1.0])
         RenderGL.renderCuboidTex(game.gl, game.glVar, this.camera, this.thing[1], Img.testImage, true, true, [0.0, 0.0, 1.0])
+        RenderGL.renderCuboidTex(game.gl, game.glVar, this.camera, this.thing[2], Img.testImage, true, true, [0.0, 0.0, 1.0])
+        RenderGL.renderCuboidColor(game.gl, game.glVar, this.camera, this.thing[3], [0.0, 1.0, 0.0], true, true, [0.0, 0.0, 1.0])
     }
 }
 

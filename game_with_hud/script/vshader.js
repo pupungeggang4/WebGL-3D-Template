@@ -81,7 +81,8 @@ const vSource = `#version 300 es
 
             vec4 normal = vec4(normalize(a_normal), 1.0);
             normal = m_m_rot_z * m_m_rot_y * m_m_rot_x * normal;
-            p_normal = vec3(normalize(normal));
+            vec3 normal_3 = vec3(normal.x, normal.y, normal.z);
+            p_normal = normalize(normal_3);
         }
         p_texcoord = a_texcoord;
     }

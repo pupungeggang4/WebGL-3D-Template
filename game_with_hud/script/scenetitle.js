@@ -1,5 +1,6 @@
 class SceneTitle {
     static loop(game) {
+        game.world.handleTick(game)
         SceneTitle.render(game)
     }
 
