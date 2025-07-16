@@ -24,6 +24,7 @@ class WebGLF {
         glVar.location = {}
         glVar.location['a_position'] = gl.getAttribLocation(glVar.program, 'a_position')
         glVar.location['a_texcoord'] = gl.getAttribLocation(glVar.program, 'a_texcoord')
+        glVar.location['a_normal'] = gl.getAttribLocation(glVar.program, 'a_normal')
         glVar.location['u_mode_v'] = gl.getUniformLocation(glVar.program, 'u_mode_v')
         glVar.location['u_mode_f'] = gl.getUniformLocation(glVar.program, 'u_mode_f')
         glVar.location['u_m_pos'] = gl.getUniformLocation(glVar.program, 'u_m_pos')
@@ -32,6 +33,7 @@ class WebGLF {
         glVar.location['u_c_pos'] = gl.getUniformLocation(glVar.program, 'u_c_pos')
         glVar.location['u_c_proj'] = gl.getUniformLocation(glVar.program, 'u_c_proj')
         glVar.location['u_color'] = gl.getUniformLocation(glVar.program, 'u_color')
+        glVar.location['u_light_d'] = gl.getUniformLocation(glVar.program, 'u_light_d')
 
         // VAOs and buffers
         glVar.vao = gl.createVertexArray()
@@ -56,30 +58,30 @@ class WebGLF {
         ]), gl.STATIC_DRAW)
         gl.bindBuffer(gl.ARRAY_BUFFER, glVar.bCuboid)
         gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([
-            -0.5, -0.5, -0.5, 1.0, 1.0,
-            0.5, -0.5, -0.5, 0.0, 1.0,
-            0.5, 0.5, -0.5, 0.0, 0.0,
-            -0.5, 0.5, -0.5, 1.0, 0.0,
-            -0.5, -0.5, 0.5, 0.0, 1.0,
-            0.5, -0.5, 0.5, 1.0, 1.0,
-            0.5, 0.5, 0.5, 1.0, 0.0,
-            -0.5, 0.5, 0.5, 0.0, 0.0,
-            -0.5, -0.5, 0.5, 1.0, 1.0,
-            -0.5, -0.5, -0.5, 0.0, 1.0,
-            -0.5, 0.5, -0.5, 0.0, 0.0,
-            -0.5, 0.5, 0.5, 1.0, 0.0,
-            0.5, -0.5, 0.5, 0.0, 1.0,
-            0.5, -0.5, -0.5, 1.0, 1.0,
-            0.5, 0.5, -0.5, 1.0, 0.0,
-            0.5, 0.5, 0.5, 0.0, 0.0,
-            -0.5, -0.5, 0.5, 1.0, 1.0,
-            0.5, -0.5, 0.5, 0.0, 1.0,
-            0.5, -0.5, -0.5, 0.0, 0.0,
-            -0.5, -0.5, -0.5, 1.0, 0.0,
-            -0.5, 0.5, 0.5, 0.0, 1.0,
-            0.5, 0.5, 0.5, 1.0, 1.0,
-            0.5, 0.5, -0.5, 1.0, 0.0,
-            -0.5, 0.5, -0.5, 0.0, 0.0,
+            -0.5, -0.5, -0.5, 1.0, 1.0, 0.0, 0.0, -1.0,
+            0.5, -0.5, -0.5, 0.0, 1.0, 0.0, 0.0, -1.0,
+            0.5, 0.5, -0.5, 0.0, 0.0, 0.0, 0.0, -1.0,
+            -0.5, 0.5, -0.5, 1.0, 0.0, 0.0, 0.0, -1.0,
+            -0.5, -0.5, 0.5, 0.0, 1.0, 0.0, 0.0, 1.0,
+            0.5, -0.5, 0.5, 1.0, 1.0, 0.0, 0.0, 1.0,
+            0.5, 0.5, 0.5, 1.0, 0.0, 0.0, 0.0, 1.0,
+            -0.5, 0.5, 0.5, 0.0, 0.0, 0.0, 0.0, 1.0
+            -0.5, -0.5, 0.5, 1.0, 1.0, -1.0, 0.0, 0.0,
+            -0.5, -0.5, -0.5, 0.0, 1.0, -1.0, 0.0, 0.0,
+            -0.5, 0.5, -0.5, 0.0, 0.0, -1.0, 0.0, 0.0,
+            -0.5, 0.5, 0.5, 1.0, 0.0, -1.0, 0.0, 0.0,
+            0.5, -0.5, 0.5, 0.0, 1.0, 1.0, 0.0, 0.0,
+            0.5, -0.5, -0.5, 1.0, 1.0, 1.0, 0.0, 0.0,
+            0.5, 0.5, -0.5, 1.0, 0.0, 1.0, 0.0, 0.0,
+            0.5, 0.5, 0.5, 0.0, 0.0, 1.0, 0.0, 0.0,
+            -0.5, -0.5, 0.5, 1.0, 1.0, 0.0, -1.0, 0.0,
+            0.5, -0.5, 0.5, 0.0, 1.0, 0.0, -1.0, 0.0,
+            0.5, -0.5, -0.5, 0.0, 0.0, 0.0, -1.0, 0.0,
+            -0.5, -0.5, -0.5, 1.0, 0.0, 0.0, -1.0, 0.0,
+            -0.5, 0.5, 0.5, 0.0, 1.0, 0.0, 1.0, 0.0,
+            0.5, 0.5, 0.5, 1.0, 1.0, 0.0, 1.0, 0.0,
+            0.5, 0.5, -0.5, 1.0, 0.0, 0.0, 1.0, 0.0,
+            -0.5, 0.5, -0.5, 0.0, 0.0, 0.0, 1.0, 0.0
         ]), gl.STATIC_DRAW)
         gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, glVar.bCuboidIndexF)
         gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array([

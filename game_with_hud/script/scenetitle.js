@@ -19,6 +19,7 @@ class SceneTitle {
         gl.enable(gl.BLEND)
         gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA)
         gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT)
+        gl.lineWidth(2)
         gl.useProgram(glVar.program)
         gl.bindVertexArray(glVar.vao)
 
