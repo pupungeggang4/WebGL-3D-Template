@@ -8,8 +8,8 @@ class World {
     }
 
     render(game) {
-        RenderGL.renderCuboidColor(game.gl, game.glVar, this.camera, this.thing[0], [0.0, 1.0, 0.0], true, true, [0.0, 0.0, -1.0])
-        RenderGL.renderCuboidTex(game.gl, game.glVar, this.camera, this.thing[1], Img.testImage, true, true, [0.0, 0.0, -1.0])
+        RenderGL.renderCuboidColor(game.gl, game.glVar, this.camera, this.thing[0], [0.0, 1.0, 0.0], true, true, [0.0, 0.0, 1.0])
+        RenderGL.renderCuboidTex(game.gl, game.glVar, this.camera, this.thing[1], Img.testImage, true, true, [0.0, 0.0, 1.0])
     }
 }
 

@@ -6,7 +6,7 @@ class RenderGL {
             gl.uniform1i(glVar.location['u_mode_f'], 2)
         } else {
             gl.uniform1i(glVar.location['u_mode_f'], 4)
-            gl.uniform3f(glVar.location['u_light_d'], 0.0, 0.0, -1.0)
+            gl.uniform3f(glVar.location['u_light_d'], lightDirection[0], lightDirection[1], lightDirection[2])
         }
         gl.uniform3f(glVar.location['u_c_pos'], camera.pos.x, camera.pos.y, camera.pos.z)
         gl.uniform4f(glVar.location['u_c_proj'], camera.fov, camera.asp, camera.near, camera.far)
@@ -19,7 +19,7 @@ class RenderGL {
         gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, glVar.bCuboidIndexF)
         gl.vertexAttribPointer(glVar.location['a_position'], 3, gl.FLOAT, false, 8 * 4, 0 * 4)
         gl.vertexAttribPointer(glVar.location['a_texcoord'], 2, gl.FLOAT, false, 8 * 4, 3 * 4)
-        gl.vertexAttribPointer(glVar.location['a_normal'], 3, gl.Float, false, 8 * 4, 6 * 4)
+        gl.vertexAttribPointer(glVar.location['a_normal'], 3, gl.FLOAT, false, 8 * 4, 5 * 4)
 
         gl.enableVertexAttribArray(glVar.location['a_position'])
         gl.enableVertexAttribArray(glVar.location['a_texcoord'])
@@ -42,7 +42,7 @@ class RenderGL {
             gl.uniform1i(glVar.location['u_mode_f'], 1)
         } else {
             gl.uniform1i(glVar.location['u_mode_f'], 3)
-            gl.uniform3f(glVar.location['u_light_d'], 0.0, 0.0, -1.0)
+            gl.uniform3f(glVar.location['u_light_d'], lightDirection[0], lightDirection[1], lightDirection[2])
         }
         gl.uniform3f(glVar.location['u_c_pos'], camera.pos.x, camera.pos.y, camera.pos.z)
         gl.uniform4f(glVar.location['u_c_proj'], camera.fov, camera.asp, camera.near, camera.far)
@@ -55,7 +55,7 @@ class RenderGL {
         gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, glVar.bCuboidIndexF)
         gl.vertexAttribPointer(glVar.location['a_position'], 3, gl.FLOAT, false, 8 * 4, 0 * 4)
         gl.vertexAttribPointer(glVar.location['a_texcoord'], 2, gl.FLOAT, false, 8 * 4, 3 * 4)
-        gl.vertexAttribPointer(glVar.location['a_normal'], 3, gl.Float, false, 8 * 4, 6 * 4)
+        gl.vertexAttribPointer(glVar.location['a_normal'], 3, gl.FLOAT, false, 8 * 4, 5 * 4)
 
         gl.enableVertexAttribArray(glVar.location['a_position'])
         gl.disableVertexAttribArray(glVar.location['a_texcoord'])
