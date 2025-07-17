@@ -47,10 +47,10 @@ class WebGLF {
 
         gl.bindBuffer(gl.ARRAY_BUFFER, glVar.bHUD)
         gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([
-            -1.0, -1.0, 0.0, 1.0,
-            1.0, -1.0, 1.0, 1.0,
-            1.0, 1.0, 1.0, 0.0,
-            -1.0, 1.0, 0.0, 0.0
+            -1.0, -1.0,  0.0,  1.0,
+             1.0, -1.0,  1.0,  1.0,
+             1.0,  1.0,  1.0,  0.0,
+            -1.0,  1.0,  0.0,  0.0
         ]), gl.STATIC_DRAW)
         gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, glVar.bHUDIndex)
         gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array([

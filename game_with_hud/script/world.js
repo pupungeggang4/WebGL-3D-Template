@@ -7,6 +7,7 @@ class World {
             new Cuboid3(0.5, -0.5, 0.2, 0.5, 0.5, 0.5, 0.0, 0.0, 0.0),
             new Cuboid3(-0.5, -0.5, 0.2, 0.5, 0.5, 0.5, 0.0, 0.0, 0.0),
         ]
+        this.light = new Vector3(0.0, 0.0, 1.0)
     }
 
     handleTick(game) {
@@ -14,13 +15,17 @@ class World {
         this.thing[0].rot.y += 0.5 * game.delta / 1000
         this.thing[1].rot.y += 0.5 * game.delta / 1000
         this.thing[1].rot.x += 0.5 * game.delta / 1000
+        this.thing[2].rot.x += 0.5 * game.delta / 1000
+        this.thing[2].rot.y += 0.5 * game.delta / 1000
+        this.thing[3].rot.y += 0.5 * game.delta / 1000
+        this.thing[3].rot.x += 0.5 * game.delta / 1000
     }
 
     render(game) {
-        RenderGL.renderCuboidColor(game.gl, game.glVar, this.camera, this.thing[0], [0.0, 1.0, 0.0], true, true, [0.0, 0.0, 1.0])
-        RenderGL.renderCuboidTex(game.gl, game.glVar, this.camera, this.thing[1], Img.testImage, true, true, [0.0, 0.0, 1.0])
-        RenderGL.renderCuboidTex(game.gl, game.glVar, this.camera, this.thing[2], Img.testImage, true, true, [0.0, 0.0, 1.0])
-        RenderGL.renderCuboidColor(game.gl, game.glVar, this.camera, this.thing[3], [0.0, 1.0, 0.0], true, true, [0.0, 0.0, 1.0])
+        RenderGL.renderCuboid(game.gl, game.glVar, this.camera, this.light, this.thing[0], 1, [0.0, 1.0, 0.0], null)
+        RenderGL.renderCuboid(game.gl, game.glVar, this.camera, this.light, this.thing[1], 2, [0.0, 1.0, 0.0], Img.testImage)
+        RenderGL.renderCuboid(game.gl, game.glVar, this.camera, this.light, this.thing[2], 3, [0.0, 0.0, 1.0], null)
+        RenderGL.renderCuboid(game.gl, game.glVar, this.camera, this.light, this.thing[3], 4, [0.0, 1.0, 0.0], Img.testImage)
     }
 }
 
