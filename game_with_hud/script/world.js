@@ -26,6 +26,8 @@ class World {
         RenderGL.renderCuboid(game.gl, game.glVar, this.camera, this.light, this.thing[1], 2, [0.0, 1.0, 0.0], Img.testImage)
         RenderGL.renderCuboid(game.gl, game.glVar, this.camera, this.light, this.thing[2], 3, [0.0, 0.0, 1.0], null)
         RenderGL.renderCuboid(game.gl, game.glVar, this.camera, this.light, this.thing[3], 4, [0.0, 1.0, 0.0], Img.testImage)
+        RenderGL.renderCuboidEdge(game.gl, game.glVar, this.camera, this.thing[0], [0.0, 0.0, 0.0])
+        RenderGL.renderCuboidEdge(game.gl, game.glVar, this.camera, this.thing[1], [0.0, 0.0, 0.0])
     }
 }
 
