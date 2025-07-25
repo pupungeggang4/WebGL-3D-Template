@@ -2,6 +2,7 @@
 class RenderGL {
     static renderCuboid(gl, glVar, camera, light, cuboid, mode, color, texImage) {
         // Mode 1: no light color, 2: no light texture, 3: light color, 4: light texture
+        gl.uniform1i(glVar.location['u_mode_v'], 1)
         gl.uniform1i(glVar.location['u_mode_f'], mode)
         if (mode == 1 || mode == 3) {
             gl.uniform3f(glVar.location['u_color'], color[0], color[1], color[2])
@@ -29,12 +30,13 @@ class RenderGL {
     }
 
     static renderCuboidEdge(gl, glVar, camera, cuboid, color) {
+        gl.uniform1i(glVar.location['u_mode_v'], 1)
         gl.uniform1i(glVar.location['u_mode_f'], 1)
         gl.uniform3f(glVar.location['u_color'], color[0], color[1], color[2])
 
-        gl.uniform3f(glVar.location['u_m_pos'], cuboid.pos.x, cuboid.pos.y, cuboid.pos.z)
-        gl.uniform3f(glVar.location['u_m_size'], cuboid.size.x, cuboid.size.y, cuboid.size.z)
-        gl.uniform3f(glVar.location['u_m_rot'], cuboid.rot.x, cuboid.rot.y, cuboid.rot.z)
+        gl.uniform3f(glVar.location['u_p_pos'], cuboid.pos.x, cuboid.pos.y, cuboid.pos.z)
+        gl.uniform3f(glVar.location['u_p_size'], cuboid.size.x, cuboid.size.y, cuboid.size.z)
+        gl.uniform3f(glVar.location['u_p_rot'], cuboid.rot.x, cuboid.rot.y, cuboid.rot.z)
         gl.uniform3f(glVar.location['u_c_pos'], camera.pos.x, camera.pos.y, camera.pos.z)
         gl.uniform4f(glVar.location['u_c_proj'], camera.fov, camera.asp, camera.near, camera.far)
 

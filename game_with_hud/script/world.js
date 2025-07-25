@@ -6,6 +6,7 @@ class World {
             new Cuboid3(0.5, 0.5, 0.2, 0.5, 0.5, 0.5, 0.0, 0.5, 0.5),
             new Cuboid3(0.5, -0.5, 0.2, 0.5, 0.5, 0.5, 0.0, 0.0, 0.0),
             new Cuboid3(-0.5, -0.5, 0.2, 0.5, 0.5, 0.5, 0.0, 0.0, 0.0),
+            new Kart()
         ]
         this.light = new Vector3(0.0, 0.0, 1.0)
     }
@@ -22,12 +23,16 @@ class World {
     }
 
     render(game) {
-        RenderGL.renderCuboid(game.gl, game.glVar, this.camera, this.light, this.thing[0], 1, [0.0, 1.0, 0.0], null)
-        RenderGL.renderCuboid(game.gl, game.glVar, this.camera, this.light, this.thing[1], 2, [0.0, 1.0, 0.0], Img.testImage)
-        RenderGL.renderCuboid(game.gl, game.glVar, this.camera, this.light, this.thing[2], 3, [0.0, 0.0, 1.0], null)
-        RenderGL.renderCuboid(game.gl, game.glVar, this.camera, this.light, this.thing[3], 4, [0.0, 1.0, 0.0], Img.testImage)
-        RenderGL.renderCuboidEdge(game.gl, game.glVar, this.camera, this.thing[0], [0.0, 0.0, 0.0])
-        RenderGL.renderCuboidEdge(game.gl, game.glVar, this.camera, this.thing[1], [0.0, 0.0, 0.0])
+        let gl = game.gl
+        let glVar = game.glVar
+        gl.uniform1i(glVar.location['u_mode_v'], 1)
+        this.thing[0].render(game, this, 1, [0.0, 1.0, 0.0], null)
+        this.thing[1].render(game, this, 2, [0.0, 1.0, 1.0], Img.testImage)
+        this.thing[2].render(game, this, 3, [0.0, 1.0, 1.0], null)
+        this.thing[3].render(game, this, 4, [0.0, 1.0, 1.0], Img.testImage)
+        this.thing[0].renderEdge(game, this, [0.0, 0.0, 0.0])
+        gl.uniform1i(glVar.location['u_mode_v'], 2)
+        this.thing[4].render(game, this)
     }
 }
 
@@ -37,7 +42,7 @@ class Camera3 {
         this.asp = 16.0 / 9.0
         this.near = 0.1
         this.far = 10.0
-        this.pos = new Vector3(0, 0, -2.0)
-        this.rot = new Vector3(0, 0, 0)
+        this.pos = new Vector3(0.8, -1.0, -3.0)
+        this.rot = new Vector3(0.1, 0, 0)
     }
 }

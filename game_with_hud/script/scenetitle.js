@@ -26,7 +26,6 @@ class SceneTitle {
 
         // Rendering 3D world.
         gl.enable(gl.DEPTH_TEST)
-        gl.uniform1i(glVar.location['u_mode_v'], 1)
         game.world.render(game)
 
         // Rendering 2D UI.
