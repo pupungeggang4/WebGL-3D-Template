@@ -24,7 +24,7 @@ class Cuboid3 {
         this.rot = new Vector3(rx, ry, rz)
     }
 
-    render(game, world, mode, color, texImage) {
+    render(game, camera, light, mode, color, texImage) {
         let gl = game.gl
         let glVar = game.glVar
         gl.uniform1i(glVar.location['u_mode_f'], mode)
@@ -37,10 +37,10 @@ class Cuboid3 {
         gl.uniform3f(glVar.location['u_p_pos'], this.pos.x, this.pos.y, this.pos.z)
         gl.uniform3f(glVar.location['u_p_size'], this.size.x, this.size.y, this.size.z)
         gl.uniform3f(glVar.location['u_p_rot'], this.rot.x, this.rot.y, this.rot.z)
-        gl.uniform3f(glVar.location['u_c_pos'], world.camera.pos.x, world.camera.pos.y, world.camera.pos.z)
-        gl.uniform3f(glVar.location['u_c_rot'], world.camera.rot.x, world.camera.rot.y, world.camera.rot.z)
-        gl.uniform4f(glVar.location['u_c_proj'], world.camera.fov, world.camera.asp, world.camera.near, world.camera.far)
-        gl.uniform3f(glVar.location['u_light_d'], world.light.x, world.light.y, world.light.z)
+        gl.uniform3f(glVar.location['u_c_pos'], camera.pos.x, camera.pos.y, camera.pos.z)
+        gl.uniform3f(glVar.location['u_c_rot'], camera.rot.x, camera.rot.y, camera.rot.z)
+        gl.uniform4f(glVar.location['u_c_proj'], camera.fov, camera.asp, camera.near, camera.far)
+        gl.uniform3f(glVar.location['u_light_d'], light.x, light.y, light.z)
 
         gl.bindBuffer(gl.ARRAY_BUFFER, glVar.bCuboid)
         gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, glVar.bCuboidIndexF)
@@ -54,7 +54,7 @@ class Cuboid3 {
         gl.drawElements(gl.TRIANGLES, 36, gl.UNSIGNED_SHORT, 0)
     }
 
-    renderEdge(game, world, color) {
+    renderEdge(game, camera, color) {
         let gl = game.gl
         let glVar = game.glVar
         gl.uniform1i(glVar.location['u_mode_f'], 1)
@@ -63,10 +63,9 @@ class Cuboid3 {
         gl.uniform3f(glVar.location['u_p_pos'], this.pos.x, this.pos.y, this.pos.z)
         gl.uniform3f(glVar.location['u_p_size'], this.size.x, this.size.y, this.size.z)
         gl.uniform3f(glVar.location['u_p_rot'], this.rot.x, this.rot.y, this.rot.z)
-        gl.uniform3f(glVar.location['u_c_pos'], world.camera.pos.x, world.camera.pos.y, world.camera.pos.z)
-        gl.uniform3f(glVar.location['u_c_rot'], world.camera.rot.x, world.camera.rot.y, world.camera.rot.z)
-        gl.uniform4f(glVar.location['u_c_proj'], world.camera.fov, world.camera.asp, world.camera.near, world.camera.far)
-        gl.uniform3f(glVar.location['u_light_d'], world.light.x, world.light.y, world.light.z)
+        gl.uniform3f(glVar.location['u_c_pos'], camera.pos.x, camera.pos.y, camera.pos.z)
+        gl.uniform3f(glVar.location['u_c_rot'], camera.rot.x, camera.rot.y, camera.rot.z)
+        gl.uniform4f(glVar.location['u_c_proj'], camera.fov, camera.asp, camera.near, camera.far)
 
         gl.bindBuffer(gl.ARRAY_BUFFER, glVar.bCuboid)
         gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, glVar.bCuboidIndexF)

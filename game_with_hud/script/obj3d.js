@@ -20,7 +20,7 @@ class Obj3 {
         ]
     }
 
-    render(game, world) {
+    render(game, camera, light) {
         let gl = game.gl
         let glVar = game.glVar
         gl.uniform1i(glVar.location['u_mode_v'], 2)
@@ -30,7 +30,7 @@ class Obj3 {
 
         for (let i = 0; i < this.part.length; i++) {
             let part = this.part[i]
-            part.shape.render(game, world, part.surfaceMode, part.color, part.texImage)
+            part.shape.render(game, camera, light, part.surfaceMode, part.color, part.texImage)
         }
     }
 }
@@ -39,6 +39,7 @@ class Kart extends Obj3 {
     constructor() {
         super()
         this.part = [
+            new Part3('cuboid', new Vector3(0.0, -0.1, 0.0), new Vector3(0.7, 0.1, 0.6), new Vector3(0.0, 0.0, 0.0), 3, [1.0, 1.0, 1.0], Img.testImage),
             new Part3('cuboid', new Vector3(-0.3, 0.0, 0.0), new Vector3(0.1, 0.1, 0.6), new Vector3(0.0, 0.0, 0.0), 3, [1.0, 1.0, 0.0], Img.testImage),
             new Part3('cuboid', new Vector3(0.3, 0.0, 0.0), new Vector3(0.1, 0.1, 0.6), new Vector3(0.0, 0.0, 0.0), 3, [1.0, 1.0, 0.0], Img.testImage),
             new Part3('cuboid', new Vector3(0.0, 0.0, 0.25), new Vector3(0.5, 0.1, 0.1), new Vector3(0.0, 0.0, 0.0), 3, [1.0, 1.0, 0.0], Img.testImage),

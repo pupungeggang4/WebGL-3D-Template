@@ -91,7 +91,7 @@ const vSource = `#version 300 es
                 1.0, 0.0, 0.0, 0.0,
                 0.0, 1.0, 0.0, 0.0,
                 0.0, 0.0, 1.0, 0.0,
-                u_c_pos.x, u_c_pos.y, u_c_pos.z, 1.0
+                -u_c_pos.x, -u_c_pos.y, -u_c_pos.z, 1.0
             );
             mat4 m_c_rot_x = mat4(
                 1.0, 0.0, 0.0, 0.0,
@@ -132,8 +132,8 @@ const vSource = `#version 300 es
                 pos = m_m_pos * pos;
             }
 
-            pos = m_z_inv * pos;
             pos = m_c_pos * pos;
+            pos = m_z_inv * pos;
             pos = m_c_rot_z * m_c_rot_y * m_c_rot_x * pos;
             pos = m_cam_proj * pos;
             gl_Position = pos;

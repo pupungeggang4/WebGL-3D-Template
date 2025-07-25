@@ -10,7 +10,7 @@ class SceneTitle {
         game.ctx.fillStyle = 'white'
         RenderHUD.fillRectUI(game.ctx, UI.title.boxTest)
         game.ctx.fillStyle = 'black'
-        RenderHUD.fillTextUI(game.ctx, 'This is UI.', UI.title.textTest)
+        //RenderHUD.fillTextUI(game.ctx, `${(1000 / game.delta).toFixed(1)}`, UI.title.textTest)
         RenderHUD.drawImageUI(game.ctx, Img.testImage, UI.title.imgTest)
 
         let gl = game.gl
