@@ -35,7 +35,7 @@ class Obj3 {
     }
 }
 
-class Kart extends Obj3 {
+class Kart3 extends Obj3 {
     constructor() {
         super()
         this.part = [

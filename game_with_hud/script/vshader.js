@@ -21,6 +21,8 @@ const vSource = `#version 300 es
             p_normal = a_normal;
         } else {
             vec4 pos = a_position;
+            float smx = sin(u_m_rot.x), smy = sin(u_m_rot.y), smz = sin(u_m_rot.z);
+            float cmx = cos(u_m_rot.x), cmy = cos(u_m_rot.y), cmz = cos(u_m_rot.z);
             mat4 m_p_pos = mat4(
                 1.0, 0.0, 0.0, 0.0,
                 0.0, 1.0, 0.0, 0.0,
@@ -35,19 +37,19 @@ const vSource = `#version 300 es
             );
             mat4 m_p_rot_x = mat4(
                 1.0, 0.0, 0.0, 0.0,
-                0.0, cos(u_p_rot.x), sin(u_p_rot.x), 0.0,
-                0.0, -sin(u_p_rot.x), cos(u_p_rot.x), 0.0,
+                0.0, cmx, smx, 0.0,
+                0.0, -smx, cmx, 0.0,
                 0.0, 0.0, 0.0, 1.0
             );
             mat4 m_p_rot_y = mat4(
-                cos(u_p_rot.y), 0.0, -sin(u_p_rot.y), 0.0,
+                cmy, 0.0, -smy, 0.0,
                 0.0, 1.0, 0.0, 0.0,
-                sin(u_p_rot.y), 0.0, cos(u_p_rot.y), 0.0,
+                smy, 0.0, cmy, 0.0,
                 0.0, 0.0, 0.0, 1.0
             );
             mat4 m_p_rot_z = mat4(
-                cos(u_p_rot.z), sin(u_p_rot.z), 0.0, 0.0,
-                -sin(u_p_rot.z), cos(u_p_rot.z), 0.0, 0.0,
+                cmz, smz, 0.0, 0.0,
+                -smz, cmz, 0.0, 0.0,
                 0.0, 0.0, 1.0, 0.0,
                 0.0, 0.0, 0.0, 1.0
             );
@@ -122,11 +124,14 @@ const vSource = `#version 300 es
                 0.0, 0.0, (2.0 * near * far) / (near - far), 0.0
             );
 
-            pos = m_p_size * pos;
-            pos = m_p_rot_z * m_p_rot_y * m_p_rot_x * pos;
-            pos = m_p_pos * pos;
-
-            if (u_mode_v == 2) {
+            if (u_mode_v == 1) {
+                pos = m_p_size * pos;
+                pos = m_p_rot_z * m_p_rot_y * m_p_rot_x * pos;
+                pos = m_p_pos * pos;
+            } else if (u_mode_v == 2) {
+                pos = m_p_size * pos;
+                pos = m_p_pos * pos;
+                pos = m_p_rot_z * m_p_rot_y * m_p_rot_x * pos;
                 pos = m_m_size * pos;
                 pos = m_m_rot_z * m_m_rot_y * m_m_rot_x * pos;
                 pos = m_m_pos * pos;
