@@ -40,7 +40,9 @@ class Kart {
     }
 
     handleTick(game) {
-        this.pos.x = Math.sin(performance.now() / 1000)
+        //this.rot.x += 1.0 * game.delta / 1000
+        //this.rot.y += 0.5 * game.delta / 1000
+        this.pos.x = 2 * Math.sin(performance.now() / 1000 * 2)
     }
 
     render(game, camera, light) {

@@ -21,8 +21,6 @@ const vSource = `#version 300 es
             p_normal = a_normal;
         } else {
             vec4 pos = a_position;
-            float smx = sin(u_m_rot.x), smy = sin(u_m_rot.y), smz = sin(u_m_rot.z);
-            float cmx = cos(u_m_rot.x), cmy = cos(u_m_rot.y), cmz = cos(u_m_rot.z);
             mat4 m_p_pos = mat4(
                 1.0, 0.0, 0.0, 0.0,
                 0.0, 1.0, 0.0, 0.0,
@@ -37,19 +35,19 @@ const vSource = `#version 300 es
             );
             mat4 m_p_rot_x = mat4(
                 1.0, 0.0, 0.0, 0.0,
-                0.0, cmx, smx, 0.0,
-                0.0, -smx, cmx, 0.0,
+                0.0, cos(u_p_rot.x), sin(u_p_rot.x), 0.0,
+                0.0, -sin(u_p_rot.x), cos(u_p_rot.x), 0.0,
                 0.0, 0.0, 0.0, 1.0
             );
             mat4 m_p_rot_y = mat4(
-                cmy, 0.0, -smy, 0.0,
+                cos(u_p_rot.y), 0.0, -sin(u_p_rot.y), 0.0,
                 0.0, 1.0, 0.0, 0.0,
-                smy, 0.0, cmy, 0.0,
+                sin(u_p_rot.y), 0.0, cos(u_p_rot.y), 0.0,
                 0.0, 0.0, 0.0, 1.0
             );
             mat4 m_p_rot_z = mat4(
-                cmz, smz, 0.0, 0.0,
-                -smz, cmz, 0.0, 0.0,
+                cos(u_p_rot.z), sin(u_p_rot.z), 0.0, 0.0,
+                -sin(u_p_rot.z), cos(u_p_rot.z), 0.0, 0.0,
                 0.0, 0.0, 1.0, 0.0,
                 0.0, 0.0, 0.0, 1.0
             );
@@ -144,8 +142,12 @@ const vSource = `#version 300 es
             gl_Position = pos;
 
             vec4 normal = vec4(normalize(a_normal), 1.0);
-            normal = m_p_rot_z * m_p_rot_y * m_p_rot_x * normal;
+
+            if (u_mode_v == 1) {
+                normal = m_m_rot_z * m_m_rot_y * m_m_rot_x * normal;
+            }
             if (u_mode_v == 2) {
+                normal = m_p_rot_z * m_p_rot_y * m_p_rot_x * normal;
                 normal = m_m_rot_z * m_m_rot_y * m_m_rot_x * normal;
             }
             vec3 normal_3 = vec3(normal.x, normal.y, normal.z);

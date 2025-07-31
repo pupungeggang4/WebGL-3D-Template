@@ -8,7 +8,7 @@ class World {
             let x = Math.random() * 2 - 1
             let y = Math.random() * 2 - 1
             let z = Math.random() * 2 + 1
-            let shape = new Cuboid3(x, y, z, 0.2, 1.0, 1.0, 0.0, 0.0, 0.0)
+            let shape = new Cuboid3(x, y, z, 0.4, 0.4, 0.4, 0.0, 0.0, 0.0)
             let color = [Math.random(), Math.random(), Math.random()]
             let cuboid = new ColorCuboid3(shape, color)
             this.thing.push(cuboid)
@@ -18,8 +18,9 @@ class World {
     handleTick(game) {
         for (let i = 0; i < this.thing.length; i++) {
             this.thing[i].cuboid.rot.x += 1.0 * game.delta / 1000
-            this.thing[i].cuboid.rot.y += 1.0 * game.delta / 1000
-            this.thing[i].cuboid.rot.z += 0.5 * game.delta / 1000
+            //this.thing[i].cuboid.rot.y += 1.0 * game.delta / 1000
+            //this.thing[i].cuboid.rot.z += 0.5 * game.delta / 1000
+            this.thing[i].cuboid.pos.x = 1.5 * Math.sin(performance.now() * 2.0 / 1000)
         }
     }
 
