@@ -15,7 +15,9 @@ class Obj3 {
         this.pos = new Vector3(0.0, 0.0, 0.0)
         this.size = new Vector3(1.0, 1.0, 1.0)
         this.rot = new Vector3(0.0, 0.0, 0.0)
-        this.part = []
+        this.part = [
+            
+        ]
     }
 
     render(game, camera, light) {
@@ -30,5 +32,17 @@ class Obj3 {
             let part = this.part[i]
             part.shape.render(game, camera, light, part.surfaceMode, part.color, part.texImage)
         }
+    }
+}
+
+class Kart3 extends Obj3 {
+    constructor() {
+        super()
+        this.part = [
+            new Part3('cuboid', new Vector3(0.0, -0.1, 0.0), new Vector3(0.7, 0.1, 1.2), new Vector3(0.0, 0.0, 0.0), 3, [1.0, 1.0, 1.0], Img.testImage),
+            new Part3('cuboid', new Vector3(-0.3, 0.0, 0.0), new Vector3(0.1, 0.1, 1.2), new Vector3(0.0, 0.0, 0.0), 3, [1.0, 1.0, 0.0], Img.testImage),
+            new Part3('cuboid', new Vector3(0.3, 0.0, 0.0), new Vector3(0.1, 0.1, 1.2), new Vector3(0.0, 0.0, 0.0), 3, [1.0, 1.0, 0.0], Img.testImage),
+            new Part3('cuboid', new Vector3(0.0, 0.0, 0.55), new Vector3(0.5, 0.1, 0.1), new Vector3(0.0, 0.0, 0.0), 3, [1.0, 1.0, 0.0], Img.testImage),
+        ]
     }
 }

@@ -1,19 +1,34 @@
 class World {
     constructor() {
         this.camera = new Camera3()
-        this.thing = [new Kart()]
-        this.light = new Vector3(0.0, -1.0, 1.0)
+        this.thing = []
+        this.light = new Vector3(0.0, 0.0, 1.0)
+
+        for (let i = 0; i < 20; i++) {
+            let x = Math.random() * 2 - 1
+            let y = Math.random() * 2 - 1
+            let z = Math.random() * 2 + 1
+            let shape = new Cuboid3(x, y, z, 0.2, 1.0, 1.0, 0.0, 0.0, 0.0)
+            let color = [Math.random(), Math.random(), Math.random()]
+            let cuboid = new ColorCuboid3(shape, color)
+            this.thing.push(cuboid)
+        }
     }
 
     handleTick(game) {
-        this.thing[0].handleTick(game)
+        for (let i = 0; i < this.thing.length; i++) {
+            this.thing[i].cuboid.rot.x += 1.0 * game.delta / 1000
+            this.thing[i].cuboid.rot.y += 1.0 * game.delta / 1000
+            this.thing[i].cuboid.rot.z += 0.5 * game.delta / 1000
+        }
     }
 
     render(game) {
         let gl = game.gl
         let glVar = game.glVar
-        gl.uniform1i(glVar.location['u_mode_v'], 2)
-        this.thing[0].render(game, this.camera, this.light)
+        for (let i = 0; i < this.thing.length; i++) {
+            this.thing[i].render(game, this.camera, this.light)
+        }
     }
 }
 
@@ -23,27 +38,8 @@ class Camera3 {
         this.asp = 16.0 / 9.0
         this.near = 0.1
         this.far = 10.0
-        this.pos = new Vector3(0.0, 1.0, -3.0)
-        this.rot = new Vector3(0.1, 0, 0)
+        this.pos = new Vector3(0.0, 0.0, -1.0)
+        this.rot = new Vector3(0, 0, 0)
     }
 }
 
-class Kart {
-    constructor() {
-        this.model = new Kart3()
-        this.pos = new Vector3(0.0, 0.0, 0.0)
-        this.size = new Vector3(1.0, 1.0, 1.0)
-        this.rot = new Vector3(0.0, 0.0, 0.0)
-        this.model.pos = this.pos
-        this.model.size = this.size
-        this.model.rot = this.rot
-    }
-
-    handleTick(game) {
-        this.rot.y += 0.1 * game.delta / 1000
-    }
-
-    render(game, camera, light) {
-        this.model.render(game, camera, light)
-    }
-}

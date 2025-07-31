@@ -125,9 +125,9 @@ const vSource = `#version 300 es
             );
 
             if (u_mode_v == 1) {
-                pos = m_m_size * pos;
-                pos = m_m_rot_z * m_m_rot_y * m_m_rot_x * pos;
-                pos = m_m_pos * pos;
+                pos = m_p_size * pos;
+                pos = m_p_rot_z * m_p_rot_y * m_p_rot_x * pos;
+                pos = m_p_pos * pos;
             } else if (u_mode_v == 2) {
                 pos = m_p_size * pos;
                 pos = m_p_pos * pos;
